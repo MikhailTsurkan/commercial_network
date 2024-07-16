@@ -84,3 +84,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    f'http://{"0.0.0.0" if ALLOWED_HOSTS[0] == "*" else ALLOWED_HOSTS[0]}:80',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    f'http://{"0.0.0.0" if ALLOWED_HOSTS[0] == "*" else ALLOWED_HOSTS[0]}:80',
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
