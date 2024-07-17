@@ -2,6 +2,14 @@ from django.db import models
 
 
 class Contact(models.Model):
+    supplier = models.ForeignKey(
+        to="Supplier",
+        on_delete=models.CASCADE,
+        related_name="contacts",
+        verbose_name="Supplier",
+        help_text="Supplier to which contact belongs"
+    )
+
     email = models.EmailField(
         unique=True,
         verbose_name="Email address",
@@ -35,6 +43,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return f'{self.email} - {self.country}, {self.city}, {self.street}, {self.building_number}'
-
-
-
