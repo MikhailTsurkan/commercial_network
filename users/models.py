@@ -6,15 +6,15 @@ from users.managers import HashedPasswordManager
 
 class User(AbstractUser):
     """
-    Модель пользователя, используется для аутентификации
+    Model for users authentication
     """
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
 
     username = None
     email = models.EmailField(
-        verbose_name='почта',
+        verbose_name='email',
         help_text="user's email",
         unique=True,
     )

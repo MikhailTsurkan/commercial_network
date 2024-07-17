@@ -6,7 +6,7 @@ from users import serializers
 
 class RegistrationAPIView(generics.CreateAPIView):
     """
-    Эндпоинт регистрации
+    Registration endpoint
     """
     permission_classes = [~IsAuthenticated]
     serializer_class = serializers.RegistrationSerializer

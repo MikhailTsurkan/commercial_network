@@ -3,9 +3,9 @@ from rest_framework.exceptions import ValidationError
 
 class MatchingPasswordsValidator:
     """
-    Валидатор для проверки совпадения двух введеных паролей
+    Validator for checking of matching password and password2 fields
     """
-    message = "Пароли не совпадают"
+    message = "Passwords must match"
 
     def __call__(self, value):
         password1 = value.get("password")
