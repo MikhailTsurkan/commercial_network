@@ -3,7 +3,7 @@ from django.db import models
 
 class Contact(models.Model):
     """
-    Модель контакта, содержащая контактные данные
+    Contact model for contacting with suppliers.
     """
     supplier = models.ForeignKey(
         to="Supplier",
@@ -50,9 +50,9 @@ class Contact(models.Model):
 
 class Product(models.Model):
     """
-    Модель продукта, описывающая продукт, его модель и дату выхода на рынок
+    Model describing a product
     """
-    supplier = models.ManyToManyField(
+    suppliers = models.ManyToManyField(
         to="Supplier",
         related_name="products",
         verbose_name="Supplier",
@@ -82,3 +82,56 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.name} - {self.model}'
 
+
+SUPPLIER_TYPES = [
+    ('factory', 'Factory'),
+    ('retailer', 'Retailer'),
+    ('individual', 'Individual'),
+]
+
+
+class Supplier(models.Model):
+    """
+    Model describing a supplier
+    """
+    supplier = models.ForeignKey(
+        to="self",
+        on_delete=models.PROTECT,
+        related_name="buyers",
+        verbose_name="Supplier",
+        help_text="Supplier of current supplier",
+        null=True,
+        blank=True
+    ),
+
+    name = models.CharField(
+        max_length=128,
+        verbose_name="Supplier name",
+        help_text="Name of the supplier"
+    ),
+    debt = models.DecimalField(
+        verbose_name="Debt",
+        decimal_places=2,
+        max_digits=10,
+        default=0,
+        help_text="Supplier's current debt""'"
+    ),
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created at",
+        help_text="Date when supplier was created"
+    )
+
+    supplier_type = models.CharField(
+        choices=SUPPLIER_TYPES,
+        verbose_name="Supplier type",
+        help_text="Type of supplier"
+    )
+
+    class Meta:
+        verbose_name = 'Supplier'
+        verbose_name_plural = 'Suppliers'
+        help_text = 'Supplier details'
+
+    def __str__(self):
+        return f'{self.name}'
