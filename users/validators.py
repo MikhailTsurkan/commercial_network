@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy
 from rest_framework.exceptions import ValidationError
 
 
@@ -5,7 +6,7 @@ class MatchingPasswordsValidator:
     """
     Validator for checking of matching password and password2 fields
     """
-    message = "Passwords must match"
+    message = gettext_lazy("Passwords must match")
 
     def __call__(self, value):
         password1 = value.get("password")
